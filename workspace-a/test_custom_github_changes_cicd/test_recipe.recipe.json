@@ -1,7 +1,7 @@
 {
   "name": "Test Recipe",
   "description": "",
-  "version": 2,
+  "version": 3,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -79,6 +79,87 @@
           }
         ],
         "uuid": "b84b74f4-9455-4a23-a188-8b1b8a3c8260"
+      },
+      {
+        "number": 2,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "f3f3bfc7",
+        "keyword": "action",
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"test\",\"type\":\"string\",\"optional\":true,\"label\":\"test\",\"details\":{\"real_name\":\"test\"},\"control_type\":\"text\",\"parent\":[\"variables\",\"data\"]}]",
+            "data": {
+              "test": "we did it."
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "test",
+            "name": "test",
+            "optional": true,
+            "type": "string",
+            "details": {
+              "real_name": "test"
+            }
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "add_field_label": "Add a variable",
+            "control_type": "form-schema-builder",
+            "empty_schema_title": "Add variables by giving them a name, type and default value",
+            "exclude_fields": [
+              "hint"
+            ],
+            "item_label": "variable",
+            "label": "Variables",
+            "mark_as_required": true,
+            "name": "variables",
+            "ngIf": "!input.name",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "test",
+                    "name": "test",
+                    "type": "string",
+                    "optional": true,
+                    "details": {
+                      "real_name": "test"
+                    },
+                    "parent": [
+                      "variables",
+                      "data"
+                    ],
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.test"
+        ],
+        "uuid": "fb7d7b1e-14de-464e-ae86-ca6fe6bb66b2"
       }
     ],
     "uuid": "963341f3-90f3-411e-a4ef-b86411658044"
@@ -93,6 +174,12 @@
     {
       "keyword": "application",
       "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
       "skip_validation": false,
       "account_id": null
     }
