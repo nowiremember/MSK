@@ -1,7 +1,7 @@
 {
   "name": "Test Recipe",
   "description": "",
-  "version": 3,
+  "version": 4,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -160,6 +160,90 @@
           "variables.data.test"
         ],
         "uuid": "fb7d7b1e-14de-464e-ae86-ca6fe6bb66b2"
+      },
+      {
+        "number": 3,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "5335631c",
+        "keyword": "action",
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"test2\",\"type\":\"string\",\"optional\":true,\"label\":\"test2\",\"details\":{\"real_name\":\"test2\"},\"control_type\":\"text\",\"parent\":[\"variables\",\"data\"]}]",
+            "data": {
+              "test2": "again."
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "test2",
+            "name": "test2",
+            "optional": true,
+            "type": "string",
+            "details": {
+              "real_name": "test2"
+            }
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "add_field_label": "Add a variable",
+            "control_type": "form-schema-builder",
+            "empty_schema_title": "Add variables by giving them a name, type and default value",
+            "exclude_fields": [
+              "hint"
+            ],
+            "item_label": "variable",
+            "label": "Variables",
+            "mark_as_required": true,
+            "name": "variables",
+            "ngIf": "!input.name",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "test2",
+                    "name": "test2",
+                    "type": "string",
+                    "optional": true,
+                    "details": {
+                      "real_name": "test2"
+                    },
+                    "parent": [
+                      "variables",
+                      "data"
+                    ],
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.test",
+          "variables",
+          "variables.schema",
+          "variables.data.test2"
+        ],
+        "uuid": "49d55c1b-25e7-43ee-941a-98d1197e924e"
       }
     ],
     "uuid": "963341f3-90f3-411e-a4ef-b86411658044"
