@@ -1,7 +1,7 @@
 {
   "name": "fourth recipe",
   "description": "",
-  "version": 2,
+  "version": 3,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -135,6 +135,31 @@
           "variables.data.test_var"
         ],
         "uuid": "4e5dabec-cf97-430c-b2f4-251bca289742"
+      },
+      {
+        "number": 2,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "4b82406f",
+        "keyword": "action",
+        "input": {
+          "user_logs_enabled": "false",
+          "message": "Test"
+        },
+        "extended_input_schema": [
+          {
+            "control_type": "switch",
+            "default": false,
+            "disable_formula": true,
+            "extends_schema": true,
+            "hint": "                Send a copy of the message to Workato logs.\n                <a href=\"https://docs.workato.com/features/logging-service.html\" target=\"_blank\" class=\"ng-scope\">\n                  Learn more\n                </a>\n",
+            "label": "Send to Workato log service",
+            "name": "user_logs_enabled",
+            "optional": true,
+            "type": "string"
+          }
+        ],
+        "uuid": "39b4125c-9fb2-4d60-ac0f-2b1b46e12da6"
       }
     ],
     "uuid": "fcfa56a1-0a2a-4d8d-ac2c-b0f93866d1ee"
@@ -149,6 +174,12 @@
     {
       "keyword": "application",
       "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
       "skip_validation": false,
       "account_id": null
     }
