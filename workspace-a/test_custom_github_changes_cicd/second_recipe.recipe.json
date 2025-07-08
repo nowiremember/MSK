@@ -1,7 +1,7 @@
 {
   "name": "Second Recipe",
   "description": "",
-  "version": 2,
+  "version": 3,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -57,6 +57,87 @@
     "block": [
       {
         "number": 1,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "7d24ef54",
+        "keyword": "action",
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"Test_Var\",\"type\":\"string\",\"optional\":true,\"label\":\"Test_Var\",\"details\":{\"real_name\":\"Test_Var\"},\"control_type\":\"text\",\"parent\":[\"variables\",\"data\"]}]",
+            "data": {
+              "Test_Var": "Testing"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "Test_Var",
+            "name": "Test_Var",
+            "optional": true,
+            "type": "string",
+            "details": {
+              "real_name": "Test_Var"
+            }
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "add_field_label": "Add a variable",
+            "control_type": "form-schema-builder",
+            "empty_schema_title": "Add variables by giving them a name, type and default value",
+            "exclude_fields": [
+              "hint"
+            ],
+            "item_label": "variable",
+            "label": "Variables",
+            "mark_as_required": true,
+            "name": "variables",
+            "ngIf": "!input.name",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Test_Var",
+                    "name": "Test_Var",
+                    "type": "string",
+                    "optional": true,
+                    "details": {
+                      "real_name": "Test_Var"
+                    },
+                    "parent": [
+                      "variables",
+                      "data"
+                    ],
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.Test_Var"
+        ],
+        "uuid": "5b86780f-8f66-4cb1-acee-3b757aba3885"
+      },
+      {
+        "number": 2,
         "provider": "clock",
         "name": "wait_for_interval",
         "as": "2cb7b362",
@@ -76,6 +157,12 @@
     {
       "keyword": "application",
       "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
       "skip_validation": false,
       "account_id": null
     }
