@@ -1,0 +1,201 @@
+{
+  "name": "Second Recipe",
+  "description": "",
+  "version": 4,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "558737f8",
+    "keyword": "trigger",
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "control_type": "integer",
+        "default": "5",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "label": "Trigger every",
+        "name": "trigger_every",
+        "optional": false,
+        "suffix": {
+          "text": "minutes"
+        },
+        "type": "string"
+      },
+      {
+        "control_type": "select",
+        "hint": "Select the timezone to use. Leave it blank to use <b>{{authUser.account_timezone}}</b>",
+        "label": "Timezone",
+        "name": "timezone",
+        "optional": true,
+        "pick_list": "timezone_id_global_pick_list",
+        "pick_list_connection_less": true,
+        "type": "string"
+      },
+      {
+        "control_type": "date_time",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "label": "Start after",
+        "name": "start_after",
+        "optional": true,
+        "parse_output": "date_time_conversion",
+        "since_field": true,
+        "type": "date_time",
+        "ignore_timezone": true,
+        "render_input": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "7d24ef54",
+        "keyword": "action",
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"Test_Var\",\"type\":\"string\",\"optional\":true,\"label\":\"Test_Var\",\"details\":{\"real_name\":\"Test_Var\"},\"control_type\":\"text\",\"parent\":[\"variables\",\"data\"]}]",
+            "data": {
+              "Test_Var": "Testing"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "Test_Var",
+            "name": "Test_Var",
+            "optional": true,
+            "type": "string",
+            "details": {
+              "real_name": "Test_Var"
+            }
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "add_field_label": "Add a variable",
+            "control_type": "form-schema-builder",
+            "empty_schema_title": "Add variables by giving them a name, type and default value",
+            "exclude_fields": [
+              "hint"
+            ],
+            "item_label": "variable",
+            "label": "Variables",
+            "mark_as_required": true,
+            "name": "variables",
+            "ngIf": "!input.name",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Test_Var",
+                    "name": "Test_Var",
+                    "type": "string",
+                    "optional": true,
+                    "details": {
+                      "real_name": "Test_Var"
+                    },
+                    "parent": [
+                      "variables",
+                      "data"
+                    ],
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.Test_Var"
+        ],
+        "uuid": "5b86780f-8f66-4cb1-acee-3b757aba3885"
+      },
+      {
+        "number": 2,
+        "provider": "clock",
+        "name": "wait_for_interval",
+        "as": "2cb7b362",
+        "keyword": "action",
+        "toggleCfg": {
+          "interval": true
+        },
+        "input": {
+          "interval": "900"
+        },
+        "uuid": "86b13cc1-a17a-44c2-b7ea-8e6e9b9fda9f"
+      },
+      {
+        "number": 3,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "9a5bf223",
+        "keyword": "action",
+        "input": {
+          "user_logs_enabled": "false",
+          "message": "test"
+        },
+        "extended_input_schema": [
+          {
+            "control_type": "switch",
+            "default": false,
+            "disable_formula": true,
+            "extends_schema": true,
+            "hint": "                Send a copy of the message to Workato logs.\n                <a href=\"https://docs.workato.com/features/logging-service.html\" target=\"_blank\" class=\"ng-scope\">\n                  Learn more\n                </a>\n",
+            "label": "Send to Workato log service",
+            "name": "user_logs_enabled",
+            "optional": true,
+            "type": "string"
+          }
+        ],
+        "uuid": "882902eb-d9e0-4823-9e8e-a48db9bb1500"
+      }
+    ],
+    "uuid": "c9f3d3e0-25e5-4af1-a5b4-e59fe5a46223"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
